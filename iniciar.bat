@@ -1,5 +1,5 @@
-REM Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Todos os direitos reservados.
 @echo off
+REM Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Licenca MIT (veja LICENSE).
 REM Clique duas vezes neste arquivo para instalar (na 1a vez) e iniciar o analisador.
 cd /d "%~dp0"
 if not exist .venv (

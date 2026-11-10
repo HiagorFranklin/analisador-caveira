@@ -1,5 +1,4 @@
-# Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Todos os direitos reservados.
-# Código proprietário: proibido copiar, modificar ou distribuir sem autorização. Veja LICENSE.
+# Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Licença MIT (veja LICENSE).
 """Guarda as análises num arquivo SQLite (historico.db) ao lado do projeto."""
 
 import json

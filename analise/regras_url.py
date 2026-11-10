@@ -1,5 +1,4 @@
-# Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Todos os direitos reservados.
-# Código proprietário: proibido copiar, modificar ou distribuir sem autorização. Veja LICENSE.
+# Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Licença MIT (veja LICENSE).
 """Regras que olham só o texto da URL (não precisam de internet)."""
 
 import re

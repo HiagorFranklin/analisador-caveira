@@ -78,11 +78,11 @@ tests/               testes automáticos
 
 ## Créditos
 
-Inspirado nas ideias do projeto [VitoriaChuarts/analisador-de-phishing](https://github.com/VitoriaChuarts/analisador-de-phishing). Como aquele repositório não tem licença, nenhum código foi copiado: tudo aqui foi escrito do zero.
+Inspirado nas ideias do projeto [VitoriaChuarts/analisador-de-phishing](https://github.com/VitoriaChuarts/analisador-de-phishing). Como aquele repositório não tem licença, nenhum código dele foi copiado: tudo aqui foi escrito do zero.
 
 ## Licença
 
-**Código fechado — todos os direitos reservados.** É proibido copiar, modificar, distribuir ou vender este projeto sem autorização por escrito do autor. Veja o arquivo [LICENSE](LICENSE).
+**Código aberto** sob a [licença MIT](LICENSE): você pode usar, copiar, modificar e distribuir à vontade, desde que mantenha o aviso de copyright de Hiagor Franklin.
 
 ## Aviso
 

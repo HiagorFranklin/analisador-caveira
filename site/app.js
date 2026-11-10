@@ -1,5 +1,4 @@
-// Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Todos os direitos reservados.
-// Código proprietário: proibido copiar, modificar ou distribuir sem autorização. Veja LICENSE.
+// Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Licença MIT (veja LICENSE).
 
 // Analisador Caveira — interface.
 // Segurança: todo texto vindo da análise entra com textContent (nunca innerHTML),

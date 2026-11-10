@@ -1,5 +1,4 @@
-# Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Todos os direitos reservados.
-# Código proprietário: proibido copiar, modificar ou distribuir sem autorização. Veja LICENSE.
+# Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Licença MIT (veja LICENSE).
 """O coração do analisador: junta as regras e calcula a nota de risco (0 a 100).
 
 Três tipos de entrada:

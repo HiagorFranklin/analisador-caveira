@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Todos os direitos reservados.
-# Código proprietário: proibido copiar, modificar ou distribuir sem autorização. Veja LICENSE.
+# Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Licença MIT (veja LICENSE).
 # Inicia o Analisador Caveira no Linux (Kali, Ubuntu, Debian...).
 # Uso:  ./iniciar.sh            (só neste computador)
 #       ./iniciar.sh --celular  (libera para o celular no mesmo Wi-Fi)
