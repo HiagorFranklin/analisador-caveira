@@ -1,0 +1,119 @@
+<!doctype html>
+<!-- Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Todos os direitos reservados. Código proprietário: proibido copiar, modificar ou distribuir sem autorização. Veja LICENSE. -->
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#070707">
+  <title>Analisador Caveira</title>
+  <link rel="icon" href="caveira.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+  <!-- Caveira reutilizável: <svg><use href="#caveira"/></svg> -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="caveira" viewBox="0 0 64 64">
+      <path fill="currentColor" fill-rule="evenodd" d="M32 6C18 6 9 15.5 9 28c0 7.5 3.6 13 8.5 16v7c0 2.8 2.2 5 5 5h19c2.8 0 5-2.2 5-5v-7c4.9-3 8.5-8.5 8.5-16C55 15.5 46 6 32 6zM16.5 28a6.5 7 0 1 0 13 0a6.5 7 0 1 0-13 0zM34.5 28a6.5 7 0 1 0 13 0a6.5 7 0 1 0-13 0zM32 36.5l-3.6 6.5h7.2zM25.5 48h2.4v8h-2.4zM30.8 48h2.4v8h-2.4zM36.1 48h2.4v8h-2.4z"/>
+    </symbol>
+    <symbol id="ossos" viewBox="0 0 120 64">
+      <g fill="currentColor">
+        <g transform="rotate(28 60 32)"><rect x="12" y="28" width="96" height="8" rx="4"/><circle cx="12" cy="27" r="6"/><circle cx="12" cy="37" r="6"/><circle cx="108" cy="27" r="6"/><circle cx="108" cy="37" r="6"/></g>
+        <g transform="rotate(-28 60 32)"><rect x="12" y="28" width="96" height="8" rx="4"/><circle cx="12" cy="27" r="6"/><circle cx="12" cy="37" r="6"/><circle cx="108" cy="27" r="6"/><circle cx="108" cy="37" r="6"/></g>
+      </g>
+    </symbol>
+  </svg>
+
+  <header class="topo">
+    <div class="logo" aria-hidden="true">
+      <svg class="logo-ossos"><use href="#ossos"/></svg>
+      <svg class="logo-caveira"><use href="#caveira"/></svg>
+    </div>
+    <h1>Analisador <span>Caveira</span></h1>
+    <p class="lema">Cole o link, o e-mail ou a mensagem. Se for golpe, a caveira avisa.</p>
+  </header>
+
+  <main>
+    <section class="cartao" aria-label="O que analisar">
+      <nav class="abas" role="tablist">
+        <button class="aba ativa" role="tab" aria-selected="true" data-aba="url">Link</button>
+        <button class="aba" role="tab" aria-selected="false" data-aba="email">E-mail (.eml)</button>
+        <button class="aba" role="tab" aria-selected="false" data-aba="texto">Mensagem</button>
+      </nav>
+
+      <form id="form-url" class="painel" data-painel="url">
+        <label for="campo-url">Endereço suspeito</label>
+        <input id="campo-url" type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false"
+               placeholder="ex.: nubank-seguro.xyz/login" required maxlength="2048">
+        <label class="opcao"><input type="checkbox" id="net-url" checked><span>Consultar a internet <small>(idade do domínio, certificado e redirecionamentos — mais lento)</small></span></label>
+        <button class="botao" type="submit"><svg><use href="#caveira"/></svg> Analisar link</button>
+      </form>
+
+      <form id="form-email" class="painel" data-painel="email" hidden>
+        <label for="campo-arquivo">Arquivo de e-mail salvo (.eml, até 2 MB)</label>
+        <label class="soltar" id="area-soltar">
+          <input id="campo-arquivo" type="file" accept=".eml,message/rfc822">
+          <svg><use href="#caveira"/></svg>
+          <span id="nome-arquivo">Toque para escolher ou arraste o arquivo aqui</span>
+        </label>
+        <p class="dica">No Gmail: abra o e-mail › ⋮ › <em>Fazer download da mensagem</em>. No Outlook: <em>Salvar como</em>.</p>
+        <label class="opcao"><input type="checkbox" id="net-email"><span>Consultar a internet para cada link <small>(mais lento)</small></span></label>
+        <button class="botao" type="submit"><svg><use href="#caveira"/></svg> Analisar e-mail</button>
+      </form>
+
+      <form id="form-texto" class="painel" data-painel="texto" hidden>
+        <label for="campo-texto">Mensagem de SMS, WhatsApp, corpo ou código-fonte do e-mail</label>
+        <textarea id="campo-texto" rows="6" required maxlength="200000"
+                  placeholder="Ex.: URGENTE! Sua conta foi bloqueada. Regularize seus dados em http://..."></textarea>
+        <label class="opcao"><input type="checkbox" id="net-texto"><span>Consultar a internet para cada link <small>(mais lento)</small></span></label>
+        <button class="botao" type="submit"><svg><use href="#caveira"/></svg> Analisar mensagem</button>
+      </form>
+
+      <p id="aviso" class="aviso" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="resultado" class="cartao resultado" hidden aria-live="polite">
+      <div class="placar">
+        <div id="medidor" class="medidor">
+          <svg class="medidor-caveira"><use href="#caveira"/></svg>
+        </div>
+        <div class="placar-texto">
+          <div class="fileira" id="fileira" aria-hidden="true">
+            <svg><use href="#caveira"/></svg><svg><use href="#caveira"/></svg><svg><use href="#caveira"/></svg>
+          </div>
+          <p id="veredito" class="veredito"></p>
+          <p class="nota"><strong id="nota">0</strong><span>/100 de risco</span></p>
+          <p id="alvo" class="alvo"></p>
+        </div>
+      </div>
+
+      <h2>Por que essa nota</h2>
+      <ul id="sinais" class="sinais"></ul>
+
+      <div id="bloco-redir" hidden>
+        <h2>Caminho do link</h2>
+        <ol id="redir" class="redir"></ol>
+      </div>
+
+      <div id="bloco-links" hidden>
+        <h2>Links encontrados</h2>
+        <ul id="links" class="links"></ul>
+      </div>
+      <p class="rodape-resultado">Links aparecem "desarmados" (<code>hxxp</code>, <code>[.]</code>) para ninguém clicar sem querer.</p>
+    </section>
+
+    <section class="cartao">
+      <div class="cabeca-historico">
+        <h2>Cemitério de análises</h2>
+        <button id="limpar" class="botao-fantasma" type="button">Limpar</button>
+      </div>
+      <ul id="historico" class="historico"><li class="vazio">Nenhuma análise ainda.</li></ul>
+    </section>
+  </main>
+
+  <footer class="rodape">© 2026 Hiagor Franklin. Todos os direitos reservados. Projeto educacional. A nota é uma estimativa por regras e não substitui um especialista em segurança.</footer>
+  <script src="app.js"></script>
+</body>
+</html>

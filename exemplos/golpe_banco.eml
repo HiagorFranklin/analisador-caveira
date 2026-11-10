@@ -1,0 +1,13 @@
+From: "Nubank Seguranca" <alerta@nubank-seguro.xyz>
+Reply-To: suporte@contas-verificar.top
+Return-Path: <bounce@mailer-x.ru>
+To: voce@example.com
+Subject: URGENTE: sua conta foi bloqueada
+Authentication-Results: mx.example.com; spf=fail smtp.mailfrom=nubank-seguro.xyz; dkim=none; dmarc=fail
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+
+<p>Detectamos acesso suspeito. Sua conta foi bloqueada.</p>
+<p>Regularize seus dados em ate 24h ou ela sera cancelada.</p>
+<p><a href="http://nubank-seguro.xyz/login/verificar?id=99">Clique aqui</a> e informe sua senha.</p>
+<p>Ou acesse: http://bit.ly/3golpe</p>

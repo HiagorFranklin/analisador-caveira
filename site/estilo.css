@@ -1,0 +1,171 @@
+/* Analisador Caveira - Copyright (c) 2026 Hiagor Franklin. Todos os direitos reservados. */
+/* Código proprietário: proibido copiar, modificar ou distribuir sem autorização. Veja LICENSE. */
+
+/* ===== Paleta: tudo preto, osso e três cores de risco ===== */
+:root {
+  --fundo: #050505;
+  --cartao: #0e0e0e;
+  --cartao-2: #151515;
+  --borda: #242424;
+  --osso: #ece6d8;
+  --apagado: #8c867a;
+  --baixo: #6fdc8c;   /* verde veneno */
+  --medio: #f5b335;   /* âmbar */
+  --alto: #ff2a3a;    /* sangue */
+  --cor-nivel: var(--apagado);
+  --raio: 14px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--osso);
+  background-color: var(--fundo);
+  /* padrão de caveiras bem apagado no fundo */
+  background-image:
+    radial-gradient(ellipse at top, rgba(255, 42, 58, .08), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 64 64'%3E%3Cpath fill='%23ffffff' fill-opacity='.025' fill-rule='evenodd' transform='translate(16 16) scale(.5)' d='M32 6C18 6 9 15.5 9 28c0 7.5 3.6 13 8.5 16v7c0 2.8 2.2 5 5 5h19c2.8 0 5-2.2 5-5v-7c4.9-3 8.5-8.5 8.5-16C55 15.5 46 6 32 6zM16.5 28a6.5 7 0 1 0 13 0a6.5 7 0 1 0-13 0zM34.5 28a6.5 7 0 1 0 13 0a6.5 7 0 1 0-13 0zM32 36.5l-3.6 6.5h7.2z'/%3E%3C/svg%3E");
+  font-family: "Space Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 0 16px env(safe-area-inset-bottom);
+}
+
+main { max-width: 720px; margin: 0 auto; display: grid; gap: 20px; }
+h2 { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--apagado); margin: 24px 0 10px; font-weight: 500; }
+code { font-family: "JetBrains Mono", monospace; font-size: .85em; }
+[hidden] { display: none !important; }
+
+/* ===== Topo / logo ===== */
+.topo { text-align: center; padding: 40px 0 28px; max-width: 720px; margin: 0 auto; }
+.logo { position: relative; width: 132px; height: 96px; margin: 0 auto 6px; }
+.logo svg { position: absolute; }
+.logo-ossos { inset: 22px 0 0; width: 132px; height: 72px; color: #3a3a3a; }
+.logo-caveira { left: 34px; top: 0; width: 64px; height: 64px; color: var(--osso); filter: drop-shadow(0 0 18px rgba(255, 42, 58, .45)); }
+h1 { font-family: "Pirata One", "Space Grotesk", serif; font-weight: 400; font-size: clamp(2.4rem, 9vw, 3.6rem); line-height: 1; margin: 0; letter-spacing: .02em; }
+h1 span { color: var(--alto); }
+.lema { color: var(--apagado); margin: 10px auto 0; max-width: 34ch; }
+
+/* ===== Cartões ===== */
+.cartao { background: var(--cartao); border: 1px solid var(--borda); border-radius: var(--raio); padding: 20px; }
+
+.abas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: #000; border: 1px solid var(--borda); border-radius: 10px; padding: 4px; margin-bottom: 18px; }
+.aba { appearance: none; border: 0; background: transparent; color: var(--apagado); font: inherit; font-size: .9rem; font-weight: 500; padding: 10px 4px; min-height: 44px; border-radius: 7px; cursor: pointer; }
+.aba:hover { color: var(--osso); }
+.aba.ativa { background: var(--cartao-2); color: var(--osso); box-shadow: inset 0 -2px 0 var(--alto); }
+
+.painel { display: grid; gap: 12px; }
+.painel > label:first-child { font-weight: 500; }
+input[type="text"], textarea {
+  width: 100%; font: inherit; font-size: 16px; /* 16px evita zoom no iPhone */
+  color: var(--osso); background: #000; border: 1px solid var(--borda); border-radius: 10px; padding: 13px 14px;
+}
+input[type="text"] { font-family: "JetBrains Mono", monospace; font-size: 15px; }
+textarea { resize: vertical; min-height: 140px; }
+input:focus, textarea:focus, button:focus-visible, .soltar:focus-within { outline: 2px solid var(--alto); outline-offset: 2px; border-color: transparent; }
+::placeholder { color: #55514a; }
+
+.opcao { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; cursor: pointer; }
+.opcao small { color: var(--apagado); display: block; }
+.opcao input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--alto); flex: none; }
+
+.soltar { position: relative; display: grid; justify-items: center; gap: 8px; text-align: center; padding: 26px 16px; border: 1px dashed #3a3a3a; border-radius: 10px; background: #000; cursor: pointer; color: var(--apagado); }
+.soltar input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.soltar svg { width: 40px; height: 40px; color: #3a3a3a; }
+.soltar.cheio { border-color: var(--osso); color: var(--osso); }
+.soltar.cheio svg { color: var(--osso); }
+.dica { margin: -4px 0 0; font-size: .85rem; color: var(--apagado); }
+
+.botao { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; border: 0; border-radius: 10px; cursor: pointer; font: inherit; font-weight: 700; font-size: 1rem; letter-spacing: .02em; color: #fff; background: var(--alto); transition: transform .1s, filter .2s; }
+.botao svg { width: 22px; height: 22px; }
+.botao:hover { filter: brightness(1.1); }
+.botao:active { transform: scale(.98); }
+.botao:disabled { filter: grayscale(1) brightness(.6); cursor: progress; }
+.botao:disabled svg { animation: tremer .5s infinite; }
+@keyframes tremer { 0%,100% { transform: rotate(0) } 25% { transform: rotate(-12deg) } 75% { transform: rotate(12deg) } }
+
+.aviso { margin: 12px 0 0; min-height: 1.5em; color: var(--medio); font-size: .92rem; }
+.aviso:empty { display: none; }
+
+/* ===== Resultado ===== */
+.resultado { --pct: 0; border-color: color-mix(in srgb, var(--cor-nivel) 45%, var(--borda)); box-shadow: 0 0 60px -20px var(--cor-nivel); animation: surgir .35s ease-out; }
+.resultado.baixo { --cor-nivel: var(--baixo); }
+.resultado.medio { --cor-nivel: var(--medio); }
+.resultado.alto  { --cor-nivel: var(--alto); }
+@keyframes surgir { from { opacity: 0; transform: translateY(8px) } }
+
+.placar { display: flex; gap: 20px; align-items: center; }
+.medidor {
+  flex: none; width: 128px; height: 128px; border-radius: 50%; display: grid; place-items: center;
+  background:
+    radial-gradient(closest-side, var(--cartao) 80%, transparent 81%),
+    conic-gradient(var(--cor-nivel) calc(var(--pct) * 1%), #222 0);
+}
+.medidor-caveira { width: 62px; height: 62px; color: var(--cor-nivel); }
+.resultado.alto .medidor-caveira { animation: pulsar 1.6s ease-in-out infinite; }
+@keyframes pulsar { 50% { filter: drop-shadow(0 0 14px var(--alto)); transform: scale(1.06) } }
+
+.placar-texto { min-width: 0; }
+.fileira { display: flex; gap: 4px; }
+.fileira svg { width: 22px; height: 22px; color: #2a2a2a; }
+.fileira svg.acesa { color: var(--cor-nivel); }
+.veredito { font-family: "Pirata One", serif; font-size: 2rem; line-height: 1.1; margin: 6px 0 0; color: var(--cor-nivel); }
+.nota { margin: 2px 0 0; color: var(--apagado); }
+.nota strong { font-family: "JetBrains Mono", monospace; font-size: 1.3rem; color: var(--osso); margin-right: 2px; }
+.alvo { margin: 6px 0 0; font-family: "JetBrains Mono", monospace; font-size: .8rem; color: var(--apagado); overflow-wrap: anywhere; }
+
+.sinais, .links, .historico, .redir { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.sinais li { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: start; padding: 11px 12px; background: var(--cartao-2); border-radius: 10px; border-left: 3px solid var(--peso, #333); }
+.sinais li svg { width: 20px; height: 20px; color: var(--peso, #555); margin-top: 1px; }
+.sinais li.leve  { --peso: var(--medio); }
+.sinais li.forte { --peso: var(--alto); }
+.sinais li.limpo { grid-template-columns: 22px 1fr; --peso: var(--baixo); }
+.pontos { font-family: "JetBrains Mono", monospace; font-weight: 700; color: var(--peso); white-space: nowrap; }
+
+.redir { counter-reset: salto; }
+.redir li { font-family: "JetBrains Mono", monospace; font-size: .8rem; overflow-wrap: anywhere; padding: 8px 12px; background: var(--cartao-2); border-radius: 8px; color: var(--apagado); }
+.redir li::before { counter-increment: salto; content: counter(salto) " › "; color: var(--osso); }
+
+.links li { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; padding: 10px 12px; background: var(--cartao-2); border-radius: 10px; }
+.links .url { font-family: "JetBrains Mono", monospace; font-size: .8rem; overflow-wrap: anywhere; }
+.links details { grid-column: 1 / -1; font-size: .85rem; color: var(--apagado); }
+.links summary { cursor: pointer; }
+.links details ul { margin: 6px 0 0; padding-left: 18px; }
+
+.selo { display: inline-flex; align-items: center; gap: 5px; font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 4px 9px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.selo svg { width: 13px; height: 13px; }
+.selo.baixo { color: var(--baixo); }
+.selo.medio { color: var(--medio); }
+.selo.alto  { color: var(--alto); background: rgba(255, 42, 58, .1); }
+
+.rodape-resultado { margin: 18px 0 0; font-size: .8rem; color: var(--apagado); }
+
+/* ===== Histórico ===== */
+.cabeca-historico { display: flex; justify-content: space-between; align-items: center; }
+.cabeca-historico h2 { margin: 0; }
+.botao-fantasma { background: none; border: 1px solid var(--borda); color: var(--apagado); font: inherit; font-size: .85rem; border-radius: 8px; padding: 6px 12px; min-height: 36px; cursor: pointer; }
+.botao-fantasma:hover { color: var(--osso); border-color: #444; }
+.historico { margin-top: 14px; }
+.historico li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 10px 12px; background: var(--cartao-2); border-radius: 10px; }
+.historico .quando { font-size: .75rem; color: var(--apagado); }
+.historico .oque { font-family: "JetBrains Mono", monospace; font-size: .8rem; overflow-wrap: anywhere; grid-column: 1; }
+.historico .selo { grid-row: 1 / span 2; grid-column: 2; align-self: center; }
+.historico .vazio { display: block; color: var(--apagado); text-align: center; background: none; }
+
+.rodape { max-width: 720px; margin: 28px auto; text-align: center; font-size: .8rem; color: #5c5850; }
+
+/* ===== Celular ===== */
+@media (max-width: 520px) {
+  .topo { padding-top: 28px; }
+  .cartao { padding: 16px; }
+  .aba { font-size: .82rem; }
+  .placar { flex-direction: column; text-align: center; }
+  .fileira { justify-content: center; }
+  .medidor { width: 140px; height: 140px; }
+  .historico .selo { font-size: .68rem; padding: 3px 7px; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

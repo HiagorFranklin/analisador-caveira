@@ -1,0 +1,4 @@
+.venv/
+__pycache__/
+historico.db
+.pytest_cache/

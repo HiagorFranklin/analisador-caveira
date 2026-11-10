@@ -1,0 +1,9 @@
+From: "Equipe Python Brasil" <contato@python.org.br>
+To: voce@example.com
+Subject: Novidades do mes
+Authentication-Results: mx.example.com; spf=pass; dkim=pass; dmarc=pass
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+
+Ola! Confira as novidades da comunidade em https://python.org.br/eventos
+Ate a proxima.
